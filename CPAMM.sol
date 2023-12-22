@@ -30,7 +30,7 @@ contract CPAMM {
     }
 
     function _update(uint _reserve0, uint _reserve1) private { // to update the reserves
-        reserve0 = reserve1;
+        reserve0 = _reserve0;
         reserve1 = _reserve1;
     }
 
@@ -53,7 +53,7 @@ contract CPAMM {
         // calculating the amount of token to be given out (including fee)
         // y*dx / (x + dx) = dy 
         uint _amountOutWithFee = (_amountIn * 997)/1000;
-        _amountOut = (_reserveOut * _amountIn)/(_reserveIn + _amountIn);
+        _amountOut = (_reserveOut * _amountOutWithFee)/(_reserveIn + _amountOutWithFee);
 
         
         // transferring token out 
